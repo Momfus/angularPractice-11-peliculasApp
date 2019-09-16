@@ -22,7 +22,6 @@ export class AppComponent {
 
       data => console.log(data)
 
-
     );
 
   }

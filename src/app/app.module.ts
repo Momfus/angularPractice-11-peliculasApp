@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule, HttpClientJsonpModule  } from '@angular/common/http';
+import { NavBarComponent } from './components/shared/nav-bar/nav-bar.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
