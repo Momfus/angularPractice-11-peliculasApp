@@ -10,15 +10,15 @@ import { PeliculasService } from './services/peliculas.service';
 export class AppComponent {
 
 
-  constructor( public _ps: PeliculasService ) {
+  constructor( public servicePeliculas: PeliculasService ) {
 
-    this._ps.getPopulares().subscribe(
+    this.servicePeliculas.getPopulares().subscribe(
 
       data => console.log( data )
 
     );
 
-    this._ps.buscarPelicula( 'matrix' ).subscribe(
+    this.servicePeliculas.buscarPelicula( 'matrix' ).subscribe(
 
       data => console.log(data)
 
