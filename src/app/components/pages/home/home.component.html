@@ -1,1 +1,30 @@
-<p>home works!</p>
+<!-- header -->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">PelisApp</h1>
+    <p class="lead">Esta es una aplicación de películas</p>
+  </div>
+</div>
+
+
+<div class="container main-container">
+
+  <!-- Películas en cartlera -->
+  <app-galeria  *ngIf="cartelera"
+                titulo="Películas en cartelera"
+                [peliculas]="cartelera.results | slice:0:6">
+  </app-galeria>
+
+  <!-- Populares -->
+  <app-galeria  *ngIf="populares"
+                titulo="Populares"
+                [peliculas]="populares.results | slice:0:6">
+  </app-galeria>
+
+  <!-- Populares entre los más pequeños -->
+  <app-galeria  *ngIf="popularesKids"
+                titulo="Populares entre los más pequeños"
+                [peliculas]="popularesKids.results | slice:0:6">
+  </app-galeria>
+
+</div>

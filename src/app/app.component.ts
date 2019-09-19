@@ -12,17 +12,23 @@ export class AppComponent {
 
   constructor( public servicePeliculas: PeliculasService ) {
 
-    this.servicePeliculas.getPopulares().subscribe(
+    // this.servicePeliculas.getPopulares().subscribe(
 
-      data => console.log( data )
+    //   data => console.log( data )
 
-    );
+    // );
 
-    this.servicePeliculas.buscarPelicula( 'matrix' ).subscribe(
+    // this.servicePeliculas.buscarPelicula( 'matrix' ).subscribe(
 
-      data => console.log(data)
+    //   data => console.log(data)
 
-    );
+    // );
+
+    // this.servicePeliculas.getCartelera().subscribe(
+
+    //   data => console.log(data)
+
+    // );
 
   }
 

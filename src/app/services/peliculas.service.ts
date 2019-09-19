@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient  } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -23,9 +24,31 @@ export class PeliculasService {
   private apikey: string = '4a80e067246de68085ecf7925f25dd6f';
   private urlMoviedb: string = 'https://api.themoviedb.org/3';
 
+  peliculas: any[] = [];
+
   constructor(
               private http: HttpClient
   ) { }
+
+  getCartelera() {
+
+    const desde = new Date();
+    const hasta = new Date();
+    hasta.setDate( hasta.getDate() + 7 );
+
+
+    const desdeMonthTwoDecimals = ('0' + (desde.getMonth() + 1)).slice(-2);
+    const hastaMonthTwoDecimals = ('0' + (desde.getMonth() + 1)).slice(-2);
+
+    const desdeStr = `${ desde.getFullYear() }-${ desdeMonthTwoDecimals }-${desde.getDate() }`;
+    const hastaStr = `${ hasta.getFullYear() }-${ hastaMonthTwoDecimals }-${hasta.getDate() }`;
+
+    const url = `${ this.urlMoviedb }/discover/movie?primary_release_date.gte=${desdeStr}&primary_release_date.lte=${hastaStr}&api_key=${this.apikey}&language=en-US&sort_by=popularity
+    .desc&include_adult=false&include_video=false&page=1&callback=JSONP_CALLBACK`;
+
+    return this.http.jsonp( url, 'JSONP_CALLBACK' );
+
+  }
 
   getPopulares() {
 
@@ -34,11 +57,24 @@ export class PeliculasService {
 
   }
 
-  buscarPelicula( texto: string ) {
+  getPopularesKids() {
 
-    let url = `${ this.urlMoviedb }/search/movie?query=${ texto }&sort_by=popularity.desc&api_key=${ this.apikey }&language=es&callback=JSONP_CALLBACK`;
+    const url = `${ this.urlMoviedb }/discover/movie?certification_country=US&certification.lte=G&sort_by=popularity.desc&api_key=${ this.apikey }&language=es&callback=JSONP_CALLBACK`;
     return this.http.jsonp( url, 'JSONP_CALLBACK' );
 
+  }
+
+  buscarPelicula( texto: string ) {
+
+    const url = `${ this.urlMoviedb }/search/movie?query=${ texto }&sort_by=popularity.desc&api_key=${ this.apikey }&language=es&callback=JSONP_CALLBACK`;
+
+    return this.http.jsonp( url, 'JSONP_CALLBACK' )
+            .pipe( map( (res:any) => {
+
+              this.peliculas = res['results'];
+              return res['results'];
+
+            } ) );
   }
 
 }
