@@ -40,8 +40,12 @@ export class PeliculasService {
     const desdeMonthTwoDecimals = ('0' + (desde.getMonth() + 1)).slice(-2);
     const hastaMonthTwoDecimals = ('0' + (desde.getMonth() + 1)).slice(-2);
 
-    const desdeStr = `${ desde.getFullYear() }-${ desdeMonthTwoDecimals }-${desde.getDate() }`;
-    const hastaStr = `${ hasta.getFullYear() }-${ hastaMonthTwoDecimals }-${hasta.getDate() }`;
+    const desdeDayTwoDecimals = ('0' + (desde.getDay() + 1)).slice(-2);
+    const hastaDayTwoDecimals = ('0' + (desde.getDay() + 1)).slice(-2);
+
+
+    const desdeStr = `${ desde.getFullYear() }-${ desdeMonthTwoDecimals }-${desdeDayTwoDecimals }`;
+    const hastaStr = `${ hasta.getFullYear() }-${ hastaMonthTwoDecimals }-${hastaDayTwoDecimals }`;
 
     const url = `${ this.urlMoviedb }/discover/movie?primary_release_date.gte=${desdeStr}&primary_release_date.lte=${hastaStr}&api_key=${this.apikey}&language=en-US&sort_by=popularity
     .desc&include_adult=false&include_video=false&page=1&callback=JSONP_CALLBACK`;
