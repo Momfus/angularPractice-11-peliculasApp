@@ -19,7 +19,7 @@
   </div>
 
   <!-- Tarjeta de peliculas -->
-  <div class="row">
+  <div class="row animated fadeIn fast">
 
       <div class="card-columns">
         <div class="card" *ngFor="let pelicula of servicePeliculas.peliculas">
@@ -31,6 +31,7 @@
 
             <!--- Botón -->
             <button type="button"
+                    [routerLink]="['/pelicula', pelicula.id, 'search', buscar]"
                     class="btn btn-outline-primary btn-block">
               Ver más...
             </button>
